@@ -23,12 +23,60 @@
   </head>
 
   <body ng-app="starter">
-    <ion-pane>
-      <ion-header-bar class="bar-stable">
-        <h1 class="title">Ionic Blank Starter</h1>
-      </ion-header-bar>
-      <ion-content class="has-header">
-      </ion-content>
-    </ion-pane>
+      <ion-side-menus>
+          
+          <!-- Center content -->
+          <ion-side-menu-content>
+              <div class="bar bar-header">
+                  <button class="button icon ion-navicon" menu-toggle="left"></button>
+                  <h1 class="title">Header Buttons</h1>
+                  <button class="button">Edit</button>
+              </div>
+              <ion-content class="padding has-subheader">
+                <script>
+                  document.addEventListener("deviceready", onDeviceReady, false);
+
+                  function onDeviceReady() {
+                  }
+
+                  var success = function (r) {
+                      console.log(r);
+                  }
+                  
+                  var fail = function (error) {
+                      console.log(error);
+                  }
+                
+                  var licenseKey = "BlinkID Key";
+                  
+                  function scanID() {
+                      cordova.plugins.blinkId.readCardId(success, fail, licenseKey);
+                  }
+
+                  function onSuccess(result){
+                      console.log("Success:"+result);
+                  }
+                  
+                  function onError(result) {
+                      console.log("Error:"+result);
+                  }
+                  function callSomeone(){
+                      window.plugins.CallNumber.callNumber(onSuccess, onError, "8478335677", true);
+                  }
+
+                </script>
+                  <button onclick="scanID()" class="button button-positive">Scan DL</button>
+                  <button onclick="callSomeone()" class="button button-positive">Call Bob</button>
+              </ion-content>
+          </ion-side-menu-content>
+          
+          <!-- Left menu -->
+          <ion-side-menu side="left">
+              <ion-header-bar class="bar-dark">
+                  <h1 class="title">Projects</h1>
+              </ion-header-bar>
+          </ion-side-menu>
+          
+      </ion-side-menus>
   </body>
 </html>
